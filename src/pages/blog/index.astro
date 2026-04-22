@@ -1,0 +1,83 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+
+const url = Astro.url;
+const categoryFilter = url.searchParams.get('category');
+
+const allPosts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const filteredPosts = categoryFilter
+  ? allPosts.filter(p => p.data.category === categoryFilter)
+  : allPosts;
+
+const categories = [...new Set(allPosts.map(p => p.data.category))];
+---
+
+<BaseLayout
+  title={categoryFilter ? `${categoryFilter}の記事一覧` : '記事一覧'}
+  description="製造業・事務職のAI活用に関する記事を掲載しています。"
+>
+  <Header />
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="flex items-center justify-between mb-6">
+      <h1 class="text-xl font-bold text-gray-900">
+        {categoryFilter ? `${categoryFilter}の記事` : '記事一覧'}
+        <span class="text-sm font-normal text-gray-400 ml-2">（{filteredPosts.length}件）</span>
+      </h1>
+    </div>
+
+    <!-- カテゴリフィルター -->
+    <div class="flex gap-2 flex-wrap mb-6">
+      <a
+        href="/blog/"
+        class:list={[
+          'text-sm px-3 py-1 rounded-full border transition-colors',
+          !categoryFilter
+            ? 'border-blue-500 bg-blue-50 text-blue-700 font-medium'
+            : 'border-gray-300 text-gray-600 hover:border-blue-400 hover:text-blue-600',
+        ]}
+      >
+        すべて
+      </a>
+      {categories.map(cat => (
+        <a
+          href={`/blog/?category=${encodeURIComponent(cat)}`}
+          class:list={[
+            'text-sm px-3 py-1 rounded-full border transition-colors',
+            categoryFilter === cat
+              ? 'border-blue-500 bg-blue-50 text-blue-700 font-medium'
+              : 'border-gray-300 text-gray-600 hover:border-blue-400 hover:text-blue-600',
+          ]}
+        >
+          {cat}
+        </a>
+      ))}
+    </div>
+
+    <!-- 記事グリッド -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {filteredPosts.map(post => (
+        <ArticleCard
+          title={post.data.title}
+          description={post.data.description}
+          slug={post.slug}
+          pubDate={post.data.pubDate}
+          category={post.data.category}
+          tags={post.data.tags}
+        />
+      ))}
+    </div>
+
+    {filteredPosts.length === 0 && (
+      <div class="text-center py-16 text-gray-400">
+        <p>この条件に一致する記事はまだありません。</p>
+      </div>
+    )}
+  </main>
+  <Footer />
+</BaseLayout>

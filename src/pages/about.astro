@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout title="運営者紹介" description="jitsumuai.comの運営者・メディアコンセプトについて">
+  <Header />
+  <main class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <h1 class="text-2xl font-bold text-gray-900 mb-8">運営者紹介</h1>
+    <div class="bg-white rounded-xl border border-gray-200 p-8 prose prose-gray max-w-none">
+      <h2>このメディアについて</h2>
+      <p>
+        jitsumuai.comは、製造業・事務職に携わる方々が「今日から使えるAI活用術」を学べるメディアです。
+        ChatGPTをはじめとする生成AIを業務に取り入れ、記録作業・文書作成・報告業務の効率化を実現するための
+        実践的な情報を発信しています。
+      </p>
+      <h2>コンテンツの特徴</h2>
+      <ul>
+        <li><strong>コピペで使えるプロンプト</strong>：読んですぐ試せる実装プロンプトを公開</li>
+        <li><strong>業種別AIエージェント事例</strong>：製造業・介護・飲食・建設など現場別の導入事例</li>
+        <li><strong>Before/After業務フロー比較</strong>：AI導入前後の業務変化を具体的に解説</li>
+      </ul>
+      <h2>免責事項</h2>
+      <p>
+        本サイトの情報は執筆時点のものです。AIツールの仕様・料金は変更される場合があります。
+        最新情報は各サービスの公式サイトをご確認ください。
+        本サイトはアフィリエイト広告を利用しています。
+      </p>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

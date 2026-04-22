@@ -1,0 +1,55 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  slug: string;
+  pubDate: Date;
+  category: string;
+  tags?: string[];
+}
+
+const { title, description, slug, pubDate, category, tags = [] } = Astro.props;
+
+const formattedDate = pubDate.toLocaleDateString('ja-JP', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const categoryColor: Record<string, string> = {
+  'AI活用': 'bg-blue-100 text-blue-700',
+  'AIエージェント': 'bg-purple-100 text-purple-700',
+  '転職・キャリア': 'bg-green-100 text-green-700',
+  '製造業DX': 'bg-orange-100 text-orange-700',
+};
+
+const colorClass = categoryColor[category] ?? 'bg-gray-100 text-gray-600';
+---
+
+<article class="bg-white rounded-lg border border-gray-200 hover:border-blue-300 hover:shadow-md transition-all duration-200 overflow-hidden">
+  <a href={`/blog/${slug}/`} class="block p-5">
+    <div class="flex items-center gap-2 mb-3">
+      <span class:list={['text-xs font-medium px-2 py-0.5 rounded-full', colorClass]}>
+        {category}
+      </span>
+      <time datetime={pubDate.toISOString()} class="text-xs text-gray-400">
+        {formattedDate}
+      </time>
+    </div>
+    <h2 class="text-base font-bold text-gray-900 leading-snug mb-2 line-clamp-2 group-hover:text-blue-600">
+      {title}
+    </h2>
+    <p class="text-sm text-gray-500 leading-relaxed line-clamp-2">
+      {description}
+    </p>
+    {tags.length > 0 && (
+      <div class="flex flex-wrap gap-1.5 mt-3">
+        {tags.slice(0, 3).map(tag => (
+          <span class="text-xs text-gray-400 bg-gray-50 px-2 py-0.5 rounded">
+            #{tag}
+          </span>
+        ))}
+      </div>
+    )}
+  </a>
+</article>

@@ -1,0 +1,95 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+
+const allPosts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const latestPosts = allPosts.slice(0, 9);
+const featuredPost = allPosts[0];
+---
+
+<BaseLayout title="jitsumuai.com">
+  <Header />
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+    <!-- ヒーローエリア -->
+    <section class="mb-12 text-center">
+      <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 leading-tight">
+        製造業・事務職のためのAI活用メディア
+      </h1>
+      <p class="text-gray-500 text-sm sm:text-base max-w-xl mx-auto">
+        ChatGPT・生成AIを業務に活かすノウハウ、AIエージェント導入事例を実践的に発信しています。
+      </p>
+    </section>
+
+    <!-- カテゴリタブ -->
+    <section class="mb-8">
+      <div class="flex gap-2 flex-wrap">
+        {[
+          { label: 'すべて', href: '/blog/' },
+          { label: 'AI仕事術', href: '/blog/?category=AI活用' },
+          { label: 'AIエージェント事例', href: '/blog/?category=AIエージェント' },
+          { label: '製造業DX', href: '/blog/?category=製造業DX' },
+          { label: '転職・キャリア', href: '/blog/?category=転職・キャリア' },
+        ].map(({ label, href }) => (
+          <a
+            href={href}
+            class="text-sm px-4 py-1.5 rounded-full border border-gray-300 text-gray-600 hover:border-blue-400 hover:text-blue-600 transition-colors"
+          >
+            {label}
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- 最新記事グリッド -->
+    <section>
+      <div class="flex items-center justify-between mb-5">
+        <h2 class="text-lg font-bold text-gray-800">最新記事</h2>
+        <a href="/blog/" class="text-sm text-blue-600 hover:text-blue-700">
+          すべて見る →
+        </a>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {latestPosts.map(post => (
+          <ArticleCard
+            title={post.data.title}
+            description={post.data.description}
+            slug={post.slug}
+            pubDate={post.data.pubDate}
+            category={post.data.category}
+            tags={post.data.tags}
+          />
+        ))}
+      </div>
+    </section>
+
+    <!-- メディア紹介 -->
+    <section class="mt-16 bg-white rounded-xl border border-gray-200 p-8">
+      <h2 class="text-lg font-bold text-gray-800 mb-4">このメディアについて</h2>
+      <div class="grid sm:grid-cols-3 gap-6 text-sm text-gray-600">
+        <div>
+          <div class="text-2xl mb-2">🏭</div>
+          <h3 class="font-semibold text-gray-800 mb-1">製造業・事務職に特化</h3>
+          <p>現場のリアルな課題に寄り添ったAI活用術を紹介します。</p>
+        </div>
+        <div>
+          <div class="text-2xl mb-2">📋</div>
+          <h3 class="font-semibold text-gray-800 mb-1">コピペで使えるプロンプト</h3>
+          <p>読んですぐ使える実装プロンプトを公開しています。</p>
+        </div>
+        <div>
+          <div class="text-2xl mb-2">🤖</div>
+          <h3 class="font-semibold text-gray-800 mb-1">AIエージェント導入事例</h3>
+          <p>業種別のAIエージェント活用事例と実装例を掲載しています。</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <Footer />
+</BaseLayout>

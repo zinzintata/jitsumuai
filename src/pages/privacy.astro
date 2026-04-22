@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout title="プライバシーポリシー" description="jitsumuai.comのプライバシーポリシー">
+  <Header />
+  <main class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <h1 class="text-2xl font-bold text-gray-900 mb-8">プライバシーポリシー</h1>
+    <div class="bg-white rounded-xl border border-gray-200 p-8 prose prose-gray max-w-none">
+      <h2>個人情報の取り扱いについて</h2>
+      <p>本サイト（jitsumuai.com）では、個人情報を収集することはありません。</p>
+
+      <h2>アクセス解析ツールについて</h2>
+      <p>
+        本サイトでは、Googleアナリティクスを使用してアクセス解析を行っています。
+        Googleアナリティクスはクッキーを使用してデータを収集しますが、個人を特定する情報は含まれません。
+      </p>
+
+      <h2>アフィリエイト広告について</h2>
+      <p>
+        本サイトはA8.net等のアフィリエイトプログラムに参加しています。
+        記事内のリンクから商品・サービスを購入された場合、本サイトに報酬が発生することがあります。
+        読者の方の負担が増えることはありません。
+      </p>
+
+      <h2>免責事項</h2>
+      <p>
+        本サイトの情報は可能な限り正確を期していますが、内容の正確性・最新性を保証するものではありません。
+        本サイトの情報を利用したことによる損害について、運営者は一切の責任を負いません。
+      </p>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

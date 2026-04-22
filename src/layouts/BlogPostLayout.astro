@@ -1,0 +1,149 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  updatedDate?: Date;
+  category: string;
+  tags?: string[];
+}
+
+const { title, description, pubDate, updatedDate, category, tags = [] } = Astro.props;
+
+const formattedPubDate = pubDate.toLocaleDateString('ja-JP', {
+  year: 'numeric', month: 'long', day: 'numeric',
+});
+const formattedUpdatedDate = updatedDate?.toLocaleDateString('ja-JP', {
+  year: 'numeric', month: 'long', day: 'numeric',
+});
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  article={{ pubDate, updatedDate, tags }}
+>
+  <Header />
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="flex gap-8">
+      <!-- 記事本文 -->
+      <article class="flex-1 min-w-0">
+        <!-- パンくず -->
+        <nav class="text-xs text-gray-400 mb-4 flex items-center gap-1">
+          <a href="/" class="hover:text-blue-600">ホーム</a>
+          <span>›</span>
+          <a href="/blog/" class="hover:text-blue-600">記事一覧</a>
+          <span>›</span>
+          <span class="text-gray-600">{title.length > 30 ? title.slice(0, 30) + '...' : title}</span>
+        </nav>
+
+        <!-- ヘッダー -->
+        <header class="mb-8">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="text-xs font-medium px-2 py-0.5 rounded-full bg-blue-100 text-blue-700">
+              {category}
+            </span>
+            <time datetime={pubDate.toISOString()} class="text-xs text-gray-400">
+              公開: {formattedPubDate}
+            </time>
+            {updatedDate && (
+              <time datetime={updatedDate.toISOString()} class="text-xs text-gray-400">
+                更新: {formattedUpdatedDate}
+              </time>
+            )}
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 leading-tight mb-4">
+            {title}
+          </h1>
+          {tags.length > 0 && (
+            <div class="flex flex-wrap gap-1.5">
+              {tags.map(tag => (
+                <span class="text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded">
+                  #{tag}
+                </span>
+              ))}
+            </div>
+          )}
+        </header>
+
+        <!-- 本文 -->
+        <div class="prose prose-gray max-w-none">
+          <slot />
+        </div>
+
+        <!-- 記事下フッター -->
+        <div class="mt-12 pt-6 border-t border-gray-200">
+          <a
+            href="/blog/"
+            class="inline-flex items-center gap-1 text-sm text-blue-600 hover:text-blue-700 font-medium"
+          >
+            ← 記事一覧に戻る
+          </a>
+        </div>
+      </article>
+
+      <!-- サイドバー -->
+      <aside class="hidden lg:block w-64 shrink-0">
+        <div class="sticky top-20 space-y-6">
+          <!-- カテゴリ -->
+          <div class="bg-white rounded-lg border border-gray-200 p-4">
+            <h3 class="text-sm font-bold text-gray-700 mb-3">カテゴリ</h3>
+            <ul class="space-y-1.5">
+              <li>
+                <a href="/blog/?category=AI活用" class="text-sm text-gray-600 hover:text-blue-600 flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-blue-400 inline-block"></span>
+                  AI仕事術・ChatGPT活用
+                </a>
+              </li>
+              <li>
+                <a href="/blog/?category=AIエージェント" class="text-sm text-gray-600 hover:text-blue-600 flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-purple-400 inline-block"></span>
+                  AIエージェント導入事例
+                </a>
+              </li>
+              <li>
+                <a href="/blog/?category=製造業DX" class="text-sm text-gray-600 hover:text-blue-600 flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-orange-400 inline-block"></span>
+                  製造業DX
+                </a>
+              </li>
+              <li>
+                <a href="/blog/?category=転職・キャリア" class="text-sm text-gray-600 hover:text-blue-600 flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-green-400 inline-block"></span>
+                  転職・キャリア
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- おすすめ記事 -->
+          <div class="bg-white rounded-lg border border-gray-200 p-4">
+            <h3 class="text-sm font-bold text-gray-700 mb-3">よく読まれている記事</h3>
+            <ul class="space-y-2">
+              <li>
+                <a href="/blog/chatgpt-gijiroku-jidoka-seizogyo/" class="text-xs text-gray-600 hover:text-blue-600 leading-snug">
+                  ChatGPTで議事録を自動化する方法
+                </a>
+              </li>
+              <li>
+                <a href="/blog/ai-houkokusho-prompt-template/" class="text-xs text-gray-600 hover:text-blue-600 leading-snug">
+                  AIで報告書を爆速作成するプロンプト
+                </a>
+              </li>
+              <li>
+                <a href="/blog/ai-gijiroku-tool-hikaku-2026/" class="text-xs text-gray-600 hover:text-blue-600 leading-snug">
+                  AI議事録ツール比較2026
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
