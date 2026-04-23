@@ -10,6 +10,7 @@ const blog = defineCollection({
     category: z.string().default('AI活用'),
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
+    image: z.string().optional(),
   }),
 });
 

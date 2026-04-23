@@ -57,6 +57,9 @@
           "type": "boolean",
           "default": false
         },
+        "image": {
+          "type": "string"
+        },
         "$schema": {
           "type": "string"
         }

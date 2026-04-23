@@ -10,9 +10,10 @@ interface Props {
   updatedDate?: Date;
   category: string;
   tags?: string[];
+  image?: string;
 }
 
-const { title, description, pubDate, updatedDate, category, tags = [] } = Astro.props;
+const { title, description, pubDate, updatedDate, category, tags = [], image } = Astro.props;
 
 const formattedPub = pubDate.toLocaleDateString('ja-JP', {
   year: 'numeric', month: 'long', day: 'numeric',
@@ -34,6 +35,7 @@ const cat = categoryMap[category] ?? { bg: 'bg-slate-50', text: 'text-slate-600'
   title={title}
   description={description}
   article={{ pubDate, updatedDate, tags }}
+  ogImage={image}
 >
   <Header />
 
@@ -51,6 +53,19 @@ const cat = categoryMap[category] ?? { bg: 'bg-slate-50', text: 'text-slate-600'
           <span>›</span>
           <span class="text-slate-500 truncate max-w-[200px]">{title}</span>
         </nav>
+
+        <!-- アイキャッチ画像 -->
+        {image && (
+          <div class="rounded-xl overflow-hidden mb-8 shadow-sm">
+            <img
+              src={image}
+              alt={title}
+              class="w-full object-cover"
+              style="max-height: 400px;"
+              loading="eager"
+            />
+          </div>
+        )}
 
         <!-- 記事ヘッダー -->
         <header class="mb-10 pb-8 border-b border-slate-200">

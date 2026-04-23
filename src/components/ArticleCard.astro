@@ -7,8 +7,9 @@ interface Props {
   category: string;
   tags?: string[];
   featured?: boolean;
+  image?: string;
 }
-const { title, description, slug, pubDate, category, tags = [], featured = false } = Astro.props;
+const { title, description, slug, pubDate, category, tags = [], featured = false, image } = Astro.props;
 
 const formattedDate = pubDate.toLocaleDateString('ja-JP', {
   year: 'numeric', month: 'long', day: 'numeric',
@@ -32,8 +33,20 @@ const cat = categoryMap[category] ?? { bg: 'bg-slate-50', text: 'text-slate-600'
     featured && 'sm:col-span-2',
   ]}
 >
-  <!-- カテゴリカラーバー -->
-  <div class:list={['h-1 w-full', cat.dot.replace('bg-', 'bg-')]}></div>
+  <!-- アイキャッチ画像 or カテゴリカラーバー -->
+  {image ? (
+    <div class="relative overflow-hidden" style="height: 160px;">
+      <img
+        src={image}
+        alt={title}
+        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        loading="lazy"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+    </div>
+  ) : (
+    <div class:list={['h-1 w-full', cat.dot.replace('bg-', 'bg-')]}></div>
+  )}
 
   <a href={`/blog/${slug}/`} class="block p-5 h-full">
     <div class="flex items-center gap-2 mb-3">
