@@ -8,6 +8,7 @@ tags:
 - スキルマップ テンプレート
 - 人材育成 スキルマップ
 - スキルマップ
+image: "/images/blog/ai-skillmap-jinzai-ikusei-seizogyo-2026/eyecatch.png"
 ---
 
 ※本記事にはアフィリエイト広告（ChatGPT Plus）が含まれます。

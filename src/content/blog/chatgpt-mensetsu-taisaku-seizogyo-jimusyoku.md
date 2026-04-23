@@ -8,6 +8,7 @@ tags:
 - 製造業 転職 面接
 - 事務職 転職 面接 対策
 - ChatGPT
+image: "/images/blog/chatgpt-mensetsu-taisaku-seizogyo-jimusyoku/eyecatch.png"
 ---
 
 ※本記事にはアフィリエイト広告（PR）が含まれています。紹介しているサービスの選定は編集部の基準に基づいており、広告主から内容の指定は受けていません。

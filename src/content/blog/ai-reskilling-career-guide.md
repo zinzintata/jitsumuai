@@ -8,6 +8,7 @@ tags:
 - リスキリング AI 何から始める
 - リスキリング 補助金 AI
 - AI
+image: "/images/blog/ai-reskilling-career-guide/eyecatch.png"
 ---
 
 本記事にはアフィリエイト広告（PR）が含まれています。紹介しているサービスの選定は編集部の基準に基づいており、広告主から内容の指定は受けていません。

@@ -8,6 +8,7 @@ tags:
 - AI スキルアップ 社会人
 - AI 勉強 何から 社会人
 - AI
+image: "/images/blog/ai-literacy-shindanki-skillup-2026/eyecatch.png"
 ---
 
 ※本記事にはアフィリエイト広告（Udemy・ChatGPT Plus・Claude Pro）が含まれます。
