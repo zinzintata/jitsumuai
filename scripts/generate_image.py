@@ -76,13 +76,22 @@ def main():
             model="gpt-image-1",
             prompt=args.prompt,
             size=size,
-            response_format="b64_json"
         )
     except Exception as e:
         print(f"ERROR: Image generation failed: {e}", file=sys.stderr)
         sys.exit(1)
 
-    image_bytes = base64.b64decode(result.data[0].b64_json)
+    # gpt-image-1 returns b64_json by default
+    image_data = result.data[0]
+    if hasattr(image_data, 'b64_json') and image_data.b64_json:
+        image_bytes = base64.b64decode(image_data.b64_json)
+    elif hasattr(image_data, 'url') and image_data.url:
+        import urllib.request
+        with urllib.request.urlopen(image_data.url) as resp:
+            image_bytes = resp.read()
+    else:
+        print("ERROR: No image data in response", file=sys.stderr)
+        sys.exit(1)
     out_path.write_bytes(image_bytes)
 
     # Output the web path (relative to public/)
