@@ -8,6 +8,7 @@ tags:
 - Gemini スプレッドシート 使い方
 - Gemini
 - for
+image: "/images/blog/gemini-workspace-jimusyoku-guide/eyecatch.png"
 ---
 
 ※本記事にはアフィリエイト広告が含まれます。

@@ -8,6 +8,7 @@ tags:
 - KPI レポート 自動化
 - 月次報告書 テンプレート AI
 - AI
+image: "/images/blog/ai-kpi-monthly-report-automation/eyecatch.png"
 ---
 
 月末になると、ExcelでKPIを集計して、Wordに転記して、考察を書いて……気づけば2〜3時間が消えている。製造業や事務職で管理業務を担っているなら、この作業に覚えがある方は多いのではないでしょうか。

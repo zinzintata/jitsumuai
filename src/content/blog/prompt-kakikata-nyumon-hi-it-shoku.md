@@ -8,6 +8,7 @@ tags:
 - プロンプト コツ ビジネス
 - 生成AI プロンプト 非エンジニア
 - プロンプト
+image: "/images/blog/prompt-kakikata-nyumon-hi-it-shoku/eyecatch.png"
 ---
 
 > 本記事にはアフィリエイトリンク（PR）が含まれます。

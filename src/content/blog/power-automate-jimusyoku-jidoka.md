@@ -7,6 +7,7 @@ tags:
 - RPA 事務職 自動化
 - Power
 - Automate
+image: "/images/blog/power-automate-jimusyoku-jidoka/eyecatch.png"
 ---
 
 本記事にはアフィリエイト広告（PR）が含まれています。紹介しているサービスの選定は編集部の基準に基づいており、広告主から内容の指定は受けていません。

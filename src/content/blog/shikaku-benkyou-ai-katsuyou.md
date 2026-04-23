@@ -8,6 +8,7 @@ tags:
 - Udemy 資格 おすすめ 社会人
 - 資格 社会人 続かない
 - 資格勉強
+image: "/images/blog/shikaku-benkyou-ai-katsuyou/eyecatch.png"
 ---
 
 ※本記事にはアフィリエイト広告（PR）が含まれています。紹介しているサービスの選定は編集部の基準に基づいており、広告主から内容の指定は受けていません。

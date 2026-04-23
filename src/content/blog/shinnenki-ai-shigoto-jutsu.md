@@ -8,6 +8,7 @@ tags:
 - 事務職 AI ツール
 - 仕事効率化 AI 2026
 - 新年度
+image: "/images/blog/shinnenki-ai-shigoto-jutsu/eyecatch.png"
 ---
 
 > 本記事にはアフィリエイト広告（PR）が含まれています。紹介している商品・サービスの選定は編集部の基準に基づいており、広告主から内容の指定は受けていません。

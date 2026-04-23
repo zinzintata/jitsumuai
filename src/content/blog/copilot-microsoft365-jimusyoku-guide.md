@@ -8,6 +8,7 @@ tags:
 - Copilot Excel 使い方
 - Copilot Teams 議事録
 - Copilot
+image: "/images/blog/copilot-microsoft365-jimusyoku-guide/eyecatch.png"
 ---
 
 > 本記事にはアフィリエイトリンク（PR）が含まれます。

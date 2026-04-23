@@ -9,6 +9,7 @@ tags:
 - AI 仕事術 事務職
 - 事務職
 updatedDate: '2026-04-01'
+image: "/images/blog/jimusyoku-ai-zangyo-herashi/eyecatch.png"
 ---
 
 > ※PR：本記事はアフィリエイト広告を含みます。紹介している商品・サービスの選定は編集部の基準に基づいており、広告主から内容の指定は受けていません。

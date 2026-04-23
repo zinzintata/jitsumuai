@@ -8,6 +8,7 @@ tags:
 - ChatGPT 見積書 作成
 - 見積書 発注書 納品書 自動化
 - AI
+image: "/images/blog/ai-mitsumori-hachu-nouhin-agent/eyecatch.png"
 ---
 
 ※PR：本記事はアフィリエイト広告を含みます。

@@ -7,6 +7,7 @@ tags:
 - VBA コピペ 事務職
 - ChatGPT
 - VBA
+image: "/images/blog/chatgpt-vba-excel-jidoka/eyecatch.png"
 ---
 
 ## 「Excelは使えるけど、VBAは難しそう」——その悩みをChatGPTが解決する
