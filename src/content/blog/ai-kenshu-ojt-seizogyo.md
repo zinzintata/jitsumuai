@@ -8,6 +8,7 @@ tags:
 - AI 新人研修 資料 自動作成
 - OJT 教材 作り方 製造業
 - AI
+image: "/images/blog/ai-kenshu-ojt-seizogyo/eyecatch.png"
 ---
 
 ※PR：本記事はアフィリエイト広告を含みます。

@@ -8,6 +8,7 @@ tags:
 - 是正処置報告書 書き方
 - 不良品報告書 ChatGPT
 - 品質管理
+image: "/images/blog/ai-quality-control-seizogyo-2026/eyecatch.png"
 ---
 
 ※本記事にはアフィリエイト広告（ChatGPT Plus）が含まれます。

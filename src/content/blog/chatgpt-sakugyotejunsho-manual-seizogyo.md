@@ -8,6 +8,7 @@ tags:
 - 作業手順書 テンプレート AI
 - ChatGPT
 - 作業手順書
+image: "/images/blog/chatgpt-sakugyotejunsho-manual-seizogyo/eyecatch.png"
 ---
 
 ※本記事にはアフィリエイト広告が含まれます。

@@ -8,6 +8,7 @@ tags:
 - クラウドワークス AI案件
 - 副業 製造業 会社員
 - AI
+image: "/images/blog/ai-fukugyou-tsuki-3man-seizogyo-jimusyoku/eyecatch.png"
 ---
 
 「副業をしたいけど、何から始めればいいかわからない」「プログラミングが苦手でもAI副業はできるのか」——製造業や事務職で働きながら、そんな疑問を持っている方は多いのではないでしょうか。

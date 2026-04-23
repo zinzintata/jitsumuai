@@ -8,6 +8,7 @@ tags:
 - ヒヤリハット テンプレート
 - KY活動 記録 書き方
 - ヒヤリハット
+image: "/images/blog/chatgpt-hiyarihatto-anzenniccho-seizogyo-2026/eyecatch.png"
 ---
 
 ※本記事にはアフィリエイト広告（ChatGPT Plus）が含まれます。

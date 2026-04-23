@@ -8,6 +8,7 @@ tags:
 - AI 検索 使い方
 - Perplexity
 - AI
+image: "/images/blog/perplexity-ai-tsukakata-seizogyo-2026/eyecatch.png"
 ---
 
 ※本記事にはアフィリエイト広告（ChatGPT Plus）が含まれます。

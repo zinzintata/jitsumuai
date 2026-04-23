@@ -8,6 +8,7 @@ tags:
 - 会議 まとめ AI アクション 自動
 - ChatGPT
 - 議事録
+image: "/images/blog/chatgpt-gijiroku-action-houkokusho-jidoka/eyecatch.png"
 ---
 
 ※PR：本記事はアフィリエイト広告を含みます。

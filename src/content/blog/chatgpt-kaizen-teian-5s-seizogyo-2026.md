@@ -8,6 +8,7 @@ tags:
 - 改善提案書 テンプレート
 - カイゼン 提案書 例文
 - 改善提案書
+image: "/images/blog/chatgpt-kaizen-teian-5s-seizogyo-2026/eyecatch.png"
 ---
 
 ※本記事にはアフィリエイト広告（ChatGPT Plus）が含まれます。

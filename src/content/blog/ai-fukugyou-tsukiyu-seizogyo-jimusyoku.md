@@ -8,6 +8,7 @@ tags:
 - 副業 ChatGPT 稼ぎ方
 - 製造業 副業 おすすめ
 - 副業
+image: "/images/blog/ai-fukugyou-tsukiyu-seizogyo-jimusyoku/eyecatch.png"
 ---
 
 ※本記事にはアフィリエイト広告（PR）が含まれています。紹介しているサービスの選定は編集部の基準に基づいており、広告主から内容の指定は受けていません。

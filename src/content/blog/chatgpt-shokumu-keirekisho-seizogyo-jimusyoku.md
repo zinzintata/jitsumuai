@@ -8,6 +8,7 @@ tags:
 - 製造業 転職 職務経歴書
 - ChatGPT 転職 書類作成
 - ChatGPT
+image: "/images/blog/chatgpt-shokumu-keirekisho-seizogyo-jimusyoku/eyecatch.png"
 ---
 
 本記事にはアフィリエイト広告（PR）が含まれています。紹介しているサービスの選定は編集部の基準に基づいており、広告主から内容の指定は受けていません。

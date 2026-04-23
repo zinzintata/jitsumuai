@@ -7,6 +7,7 @@ tags:
 - Google Workspace 料金
 - Google
 - Workspace
+image: "/images/blog/google-workspace-vs-microsoft365-seizogyo-hikaku/eyecatch.png"
 ---
 
 「Google WorkspaceとMicrosoft 365、うちの会社にはどちらが合うのか」——ITツールの導入や乗り換えを検討している中小製造業の担当者からよく聞かれる問いです。

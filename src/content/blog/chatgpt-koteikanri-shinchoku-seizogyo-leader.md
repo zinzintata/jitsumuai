@@ -8,6 +8,7 @@ tags:
 - 進捗報告 ChatGPT
 - 製造業 現場 DX ツール
 - ChatGPT
+image: "/images/blog/chatgpt-koteikanri-shinchoku-seizogyo-leader/eyecatch.png"
 ---
 
 ※本記事にはアフィリエイト広告（PR）が含まれています。紹介しているサービスの選定は編集部の基準に基づいており、広告主から内容の指定は受けていません。

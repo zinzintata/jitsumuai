@@ -8,6 +8,7 @@ tags:
 - AI 情報漏洩 対策
 - ChatGPT 入力してはいけない
 - ChatGPT
+image: "/images/blog/chatgpt-shanal-rule-seizogyo-2026/eyecatch.png"
 ---
 
 ※本記事にはアフィリエイト広告（ChatGPT Team・ChatGPT Plus・Microsoft 365 Copilot）が含まれます。
