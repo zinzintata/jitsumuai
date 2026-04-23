@@ -10,6 +10,7 @@ tags:
   - 製造業
   - 事務職
 draft: false
+image: "/images/blog/chatgpt-powerpoint-seizogyo-jimusyoku-2026/eyecatch.png"
 ---
 
 > 本記事にはアフィリエイトリンク（PR）が含まれます。
