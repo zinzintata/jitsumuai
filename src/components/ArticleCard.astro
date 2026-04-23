@@ -6,50 +6,72 @@ interface Props {
   pubDate: Date;
   category: string;
   tags?: string[];
+  featured?: boolean;
 }
-
-const { title, description, slug, pubDate, category, tags = [] } = Astro.props;
+const { title, description, slug, pubDate, category, tags = [], featured = false } = Astro.props;
 
 const formattedDate = pubDate.toLocaleDateString('ja-JP', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
+  year: 'numeric', month: 'long', day: 'numeric',
 });
 
-const categoryColor: Record<string, string> = {
-  'AI活用': 'bg-blue-100 text-blue-700',
-  'AIエージェント': 'bg-purple-100 text-purple-700',
-  '転職・キャリア': 'bg-green-100 text-green-700',
-  '製造業DX': 'bg-orange-100 text-orange-700',
+const categoryMap: Record<string, { bg: string; text: string; dot: string }> = {
+  'AI活用':       { bg: 'bg-blue-50',   text: 'text-blue-700',  dot: 'bg-blue-500' },
+  'AIエージェント': { bg: 'bg-violet-50', text: 'text-violet-700', dot: 'bg-violet-500' },
+  '製造業DX':     { bg: 'bg-orange-50', text: 'text-orange-700', dot: 'bg-orange-500' },
+  '転職・キャリア': { bg: 'bg-emerald-50',text: 'text-emerald-700',dot: 'bg-emerald-500' },
 };
-
-const colorClass = categoryColor[category] ?? 'bg-gray-100 text-gray-600';
+const cat = categoryMap[category] ?? { bg: 'bg-slate-50', text: 'text-slate-600', dot: 'bg-slate-400' };
 ---
 
-<article class="bg-white rounded-lg border border-gray-200 hover:border-blue-300 hover:shadow-md transition-all duration-200 overflow-hidden">
-  <a href={`/blog/${slug}/`} class="block p-5">
+<article
+  class:list={[
+    'group bg-white rounded-xl border border-slate-200 overflow-hidden',
+    'transition-all duration-300 hover:-translate-y-1',
+    'hover:shadow-[0_8px_24px_rgba(37,99,235,0.10),0_2px_8px_rgba(0,0,0,0.06)]',
+    'hover:border-blue-200',
+    featured && 'sm:col-span-2',
+  ]}
+>
+  <!-- カテゴリカラーバー -->
+  <div class:list={['h-1 w-full', cat.dot.replace('bg-', 'bg-')]}></div>
+
+  <a href={`/blog/${slug}/`} class="block p-5 h-full">
     <div class="flex items-center gap-2 mb-3">
-      <span class:list={['text-xs font-medium px-2 py-0.5 rounded-full', colorClass]}>
+      <span class:list={['inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full', cat.bg, cat.text]}>
+        <span class:list={['w-1.5 h-1.5 rounded-full', cat.dot]}></span>
         {category}
       </span>
-      <time datetime={pubDate.toISOString()} class="text-xs text-gray-400">
+      <time class="text-xs text-slate-400" datetime={pubDate.toISOString()}>
         {formattedDate}
       </time>
     </div>
-    <h2 class="text-base font-bold text-gray-900 leading-snug mb-2 line-clamp-2 group-hover:text-blue-600">
+
+    <h2 class:list={[
+      'font-bold text-slate-900 leading-snug mb-2',
+      'group-hover:text-blue-700 transition-colors duration-200',
+      featured ? 'text-xl' : 'text-base',
+      'line-clamp-2',
+    ]}>
       {title}
     </h2>
-    <p class="text-sm text-gray-500 leading-relaxed line-clamp-2">
+
+    <p class="text-sm text-slate-500 leading-relaxed line-clamp-2 mb-3">
       {description}
     </p>
-    {tags.length > 0 && (
-      <div class="flex flex-wrap gap-1.5 mt-3">
-        {tags.slice(0, 3).map(tag => (
-          <span class="text-xs text-gray-400 bg-gray-50 px-2 py-0.5 rounded">
-            #{tag}
-          </span>
-        ))}
-      </div>
-    )}
+
+    <div class="flex items-center justify-between mt-auto pt-2">
+      {tags.length > 0 && (
+        <div class="flex flex-wrap gap-1">
+          {tags.slice(0, 2).map(tag => (
+            <span class="text-xs text-slate-400 bg-slate-50 border border-slate-100 px-2 py-0.5 rounded-md">
+              #{tag}
+            </span>
+          ))}
+        </div>
+      )}
+      <span class="ml-auto text-xs font-medium text-blue-600 group-hover:translate-x-1 transition-transform duration-200">
+        読む →
+      </span>
+    </div>
   </a>
 </article>

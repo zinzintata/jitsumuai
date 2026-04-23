@@ -8,88 +8,178 @@ import ArticleCard from '../components/ArticleCard.astro';
 const allPosts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-const latestPosts = allPosts.slice(0, 9);
-const featuredPost = allPosts[0];
+const latest = allPosts.slice(0, 9);
+
+const categories = [
+  { label: 'AI仕事術・ChatGPT活用', key: 'AI活用', icon: '💼', desc: '報告書・議事録・メール作成を効率化する実践ガイド', color: 'blue' },
+  { label: 'AIエージェント導入事例', key: 'AIエージェント', icon: '🤖', desc: '業種別の自動化事例と実装プロンプトを公開', color: 'violet' },
+  { label: '製造業DX', key: '製造業DX', icon: '🏭', desc: '現場で使えるDX推進・業務改善のノウハウ', color: 'orange' },
+  { label: '転職・キャリア', key: '転職・キャリア', icon: '📈', desc: 'AIスキルを活かした転職・副業の進め方', color: 'emerald' },
+];
+
+const colorMap: Record<string, string> = {
+  blue:    'bg-blue-50 border-blue-200 hover:border-blue-400 text-blue-600',
+  violet:  'bg-violet-50 border-violet-200 hover:border-violet-400 text-violet-600',
+  orange:  'bg-orange-50 border-orange-200 hover:border-orange-400 text-orange-600',
+  emerald: 'bg-emerald-50 border-emerald-200 hover:border-emerald-400 text-emerald-600',
+};
 ---
 
 <BaseLayout title="jitsumuai.com">
   <Header />
-  <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
-    <!-- ヒーローエリア -->
-    <section class="mb-12 text-center">
-      <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 leading-tight">
-        製造業・事務職のためのAI活用メディア
-      </h1>
-      <p class="text-gray-500 text-sm sm:text-base max-w-xl mx-auto">
-        ChatGPT・生成AIを業務に活かすノウハウ、AIエージェント導入事例を実践的に発信しています。
-      </p>
-    </section>
+  <!-- ─── Hero ─── -->
+  <section class="relative bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 text-white overflow-hidden">
+    <!-- 背景グロー -->
+    <div class="absolute inset-0 pointer-events-none">
+      <div class="absolute top-1/4 left-1/3 w-96 h-96 rounded-full bg-blue-600/20 blur-3xl"></div>
+      <div class="absolute bottom-1/4 right-1/4 w-64 h-64 rounded-full bg-violet-600/15 blur-3xl"></div>
+    </div>
 
-    <!-- カテゴリタブ -->
-    <section class="mb-8">
-      <div class="flex gap-2 flex-wrap">
+    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28">
+      <div class="max-w-2xl">
+        <div data-animate class="inline-flex items-center gap-2 bg-blue-500/20 border border-blue-400/30 text-blue-300 text-xs font-medium px-3 py-1.5 rounded-full mb-6">
+          <span class="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></span>
+          製造業・事務職のためのAI活用メディア
+        </div>
+        <h1 data-animate data-animate-delay="1" class="font-bold text-3xl sm:text-5xl leading-tight mb-6 text-white" style="font-family: 'Noto Serif JP', serif;">
+          AIで仕事を、<br class="hidden sm:block"/>もっとスマートに。
+        </h1>
+        <p data-animate data-animate-delay="2" class="text-slate-300 text-base sm:text-lg leading-relaxed mb-8 max-w-lg">
+          ChatGPT・生成AIを業務に活かすノウハウと、業種別AIエージェント導入事例を実践的に発信しています。
+        </p>
+        <div data-animate data-animate-delay="3" class="flex flex-wrap gap-3">
+          <a href="/blog/" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/25">
+            記事を読む
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
+          <a href="/blog/?category=AIエージェント" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-medium px-6 py-3 rounded-xl transition-all duration-200 backdrop-blur-sm">
+            AIエージェント事例
+          </a>
+        </div>
+      </div>
+
+      <!-- 統計 -->
+      <div data-animate data-animate-delay="4" class="flex flex-wrap gap-8 mt-14">
         {[
-          { label: 'すべて', href: '/blog/' },
-          { label: 'AI仕事術', href: '/blog/?category=AI活用' },
-          { label: 'AIエージェント事例', href: '/blog/?category=AIエージェント' },
-          { label: '製造業DX', href: '/blog/?category=製造業DX' },
-          { label: '転職・キャリア', href: '/blog/?category=転職・キャリア' },
-        ].map(({ label, href }) => (
+          { num: '60+', label: '公開記事数' },
+          { num: '4', label: 'コンテンツ領域' },
+          { num: '無料', label: 'プロンプト公開' },
+        ].map(({ num, label }) => (
+          <div>
+            <div class="text-2xl font-bold text-white">{num}</div>
+            <div class="text-xs text-slate-400 mt-0.5">{label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- ─── カテゴリ ─── -->
+    <section class="py-14">
+      <div class="text-center mb-10" data-animate>
+        <p class="text-xs font-semibold text-blue-600 uppercase tracking-widest mb-2">Categories</p>
+        <h2 class="text-2xl font-bold text-slate-900" style="font-family: 'Noto Serif JP', serif;">コンテンツカテゴリ</h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {categories.map(({ label, key, icon, desc, color }, i) => (
           <a
-            href={href}
-            class="text-sm px-4 py-1.5 rounded-full border border-gray-300 text-gray-600 hover:border-blue-400 hover:text-blue-600 transition-colors"
+            href={`/blog/?category=${encodeURIComponent(key)}`}
+            class:list={[
+              'group p-5 rounded-xl border-2 transition-all duration-300 hover:-translate-y-1',
+              colorMap[color],
+            ]}
+            data-animate
+            data-animate-delay={String(i + 1)}
           >
-            {label}
+            <div class="text-2xl mb-3">{icon}</div>
+            <h3 class="font-bold text-slate-900 text-sm mb-1.5 leading-snug">{label}</h3>
+            <p class="text-xs text-slate-500 leading-relaxed">{desc}</p>
           </a>
         ))}
       </div>
     </section>
 
-    <!-- 最新記事グリッド -->
-    <section>
-      <div class="flex items-center justify-between mb-5">
-        <h2 class="text-lg font-bold text-gray-800">最新記事</h2>
-        <a href="/blog/" class="text-sm text-blue-600 hover:text-blue-700">
-          すべて見る →
+    <!-- ─── 最新記事 ─── -->
+    <section class="pb-16">
+      <div class="flex items-end justify-between mb-8" data-animate>
+        <div>
+          <p class="text-xs font-semibold text-blue-600 uppercase tracking-widest mb-1">Latest</p>
+          <h2 class="text-2xl font-bold text-slate-900" style="font-family: 'Noto Serif JP', serif;">最新記事</h2>
+        </div>
+        <a href="/blog/" class="text-sm font-medium text-blue-600 hover:text-blue-700 flex items-center gap-1 group">
+          すべて見る
+          <span class="group-hover:translate-x-1 transition-transform">→</span>
         </a>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {latestPosts.map(post => (
-          <ArticleCard
-            title={post.data.title}
-            description={post.data.description}
-            slug={post.slug}
-            pubDate={post.data.pubDate}
-            category={post.data.category}
-            tags={post.data.tags}
-          />
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {latest.map((post, i) => (
+          <div data-animate data-animate-delay={String((i % 3) + 1)}>
+            <ArticleCard
+              title={post.data.title}
+              description={post.data.description}
+              slug={post.slug}
+              pubDate={post.data.pubDate}
+              category={post.data.category}
+              tags={post.data.tags}
+            />
+          </div>
         ))}
+      </div>
+
+      <div class="text-center mt-10" data-animate>
+        <a
+          href="/blog/"
+          class="inline-flex items-center gap-2 border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white font-semibold px-8 py-3 rounded-xl transition-all duration-200"
+        >
+          記事をもっと見る
+        </a>
       </div>
     </section>
 
-    <!-- メディア紹介 -->
-    <section class="mt-16 bg-white rounded-xl border border-gray-200 p-8">
-      <h2 class="text-lg font-bold text-gray-800 mb-4">このメディアについて</h2>
-      <div class="grid sm:grid-cols-3 gap-6 text-sm text-gray-600">
-        <div>
-          <div class="text-2xl mb-2">🏭</div>
-          <h3 class="font-semibold text-gray-800 mb-1">製造業・事務職に特化</h3>
-          <p>現場のリアルな課題に寄り添ったAI活用術を紹介します。</p>
-        </div>
-        <div>
-          <div class="text-2xl mb-2">📋</div>
-          <h3 class="font-semibold text-gray-800 mb-1">コピペで使えるプロンプト</h3>
-          <p>読んですぐ使える実装プロンプトを公開しています。</p>
-        </div>
-        <div>
-          <div class="text-2xl mb-2">🤖</div>
-          <h3 class="font-semibold text-gray-800 mb-1">AIエージェント導入事例</h3>
-          <p>業種別のAIエージェント活用事例と実装例を掲載しています。</p>
+    <!-- ─── このメディアについて ─── -->
+    <section class="py-14 border-t border-slate-200">
+      <div class="bg-gradient-to-br from-slate-900 to-blue-950 rounded-2xl overflow-hidden">
+        <div class="grid sm:grid-cols-2 gap-0">
+          <div class="p-10 sm:p-12">
+            <p class="text-xs font-semibold text-blue-400 uppercase tracking-widest mb-3" data-animate>About</p>
+            <h2 class="text-2xl font-bold text-white mb-4 leading-tight" data-animate data-animate-delay="1" style="font-family: 'Noto Serif JP', serif;">
+              現場で使える、<br/>実践的なAI情報を。
+            </h2>
+            <p class="text-slate-300 text-sm leading-relaxed mb-6" data-animate data-animate-delay="2">
+              難しいAIの話ではなく、明日から業務に使えるプロンプトと事例を届けることを大切にしています。
+            </p>
+            <a href="/about/" class="inline-flex items-center gap-1 text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors" data-animate data-animate-delay="3">
+              運営者紹介を見る →
+            </a>
+          </div>
+          <div class="p-10 sm:p-12 border-t sm:border-t-0 sm:border-l border-white/10">
+            <ul class="space-y-5">
+              {[
+                { icon: '📋', title: 'コピペで使えるプロンプト', desc: '読んだその日から業務に使える実装プロンプトを公開' },
+                { icon: '🔄', title: 'Before/After業務フロー', desc: 'AI導入前後の変化を具体的に解説' },
+                { icon: '🏭', title: '現場目線の記事', desc: '製造業・事務職のリアルな課題に寄り添った内容' },
+              ].map(({ icon, title, desc }, i) => (
+                <li class="flex gap-4" data-animate data-animate-delay={String(i + 1)}>
+                  <span class="text-xl mt-0.5">{icon}</span>
+                  <div>
+                    <p class="font-semibold text-white text-sm">{title}</p>
+                    <p class="text-slate-400 text-xs mt-0.5 leading-relaxed">{desc}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </section>
 
   </main>
+
   <Footer />
 </BaseLayout>

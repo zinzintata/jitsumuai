@@ -14,12 +14,20 @@ interface Props {
 
 const { title, description, pubDate, updatedDate, category, tags = [] } = Astro.props;
 
-const formattedPubDate = pubDate.toLocaleDateString('ja-JP', {
+const formattedPub = pubDate.toLocaleDateString('ja-JP', {
   year: 'numeric', month: 'long', day: 'numeric',
 });
-const formattedUpdatedDate = updatedDate?.toLocaleDateString('ja-JP', {
+const formattedUpd = updatedDate?.toLocaleDateString('ja-JP', {
   year: 'numeric', month: 'long', day: 'numeric',
 });
+
+const categoryMap: Record<string, { bg: string; text: string; bar: string }> = {
+  'AI活用':       { bg: 'bg-blue-50',   text: 'text-blue-700',  bar: 'bg-blue-600' },
+  'AIエージェント': { bg: 'bg-violet-50', text: 'text-violet-700', bar: 'bg-violet-600' },
+  '製造業DX':     { bg: 'bg-orange-50', text: 'text-orange-700', bar: 'bg-orange-600' },
+  '転職・キャリア': { bg: 'bg-emerald-50',text: 'text-emerald-700',bar: 'bg-emerald-600' },
+};
+const cat = categoryMap[category] ?? { bg: 'bg-slate-50', text: 'text-slate-600', bar: 'bg-slate-400' };
 ---
 
 <BaseLayout
@@ -28,122 +36,135 @@ const formattedUpdatedDate = updatedDate?.toLocaleDateString('ja-JP', {
   article={{ pubDate, updatedDate, tags }}
 >
   <Header />
-  <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <div class="flex gap-8">
-      <!-- 記事本文 -->
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="flex gap-10 items-start">
+
+      <!-- ─── 記事本文 ─── -->
       <article class="flex-1 min-w-0">
+
         <!-- パンくず -->
-        <nav class="text-xs text-gray-400 mb-4 flex items-center gap-1">
-          <a href="/" class="hover:text-blue-600">ホーム</a>
+        <nav class="flex items-center gap-1.5 text-xs text-slate-400 mb-6">
+          <a href="/" class="hover:text-blue-600 transition-colors">ホーム</a>
           <span>›</span>
-          <a href="/blog/" class="hover:text-blue-600">記事一覧</a>
+          <a href="/blog/" class="hover:text-blue-600 transition-colors">記事一覧</a>
           <span>›</span>
-          <span class="text-gray-600">{title.length > 30 ? title.slice(0, 30) + '...' : title}</span>
+          <span class="text-slate-500 truncate max-w-[200px]">{title}</span>
         </nav>
 
-        <!-- ヘッダー -->
-        <header class="mb-8">
-          <div class="flex items-center gap-2 mb-3">
-            <span class="text-xs font-medium px-2 py-0.5 rounded-full bg-blue-100 text-blue-700">
+        <!-- 記事ヘッダー -->
+        <header class="mb-10 pb-8 border-b border-slate-200">
+          <div class="flex flex-wrap items-center gap-2 mb-4">
+            <span class:list={['text-xs font-semibold px-3 py-1 rounded-full', cat.bg, cat.text]}>
               {category}
             </span>
-            <time datetime={pubDate.toISOString()} class="text-xs text-gray-400">
-              公開: {formattedPubDate}
-            </time>
-            {updatedDate && (
-              <time datetime={updatedDate.toISOString()} class="text-xs text-gray-400">
-                更新: {formattedUpdatedDate}
-              </time>
-            )}
+            {tags.slice(0, 2).map(tag => (
+              <span class="text-xs text-slate-400 bg-slate-100 px-2.5 py-1 rounded-full">
+                #{tag}
+              </span>
+            ))}
           </div>
-          <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 leading-tight mb-4">
+
+          <h1 class="text-2xl sm:text-3xl font-bold text-slate-900 leading-tight mb-5" style="font-family: 'Noto Serif JP', serif;">
             {title}
           </h1>
-          {tags.length > 0 && (
-            <div class="flex flex-wrap gap-1.5">
+
+          <div class="flex flex-wrap items-center gap-4 text-xs text-slate-400">
+            <span class="flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+              公開: <time datetime={pubDate.toISOString()}>{formattedPub}</time>
+            </span>
+            {updatedDate && (
+              <span class="flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                </svg>
+                更新: <time datetime={updatedDate.toISOString()}>{formattedUpd}</time>
+              </span>
+            )}
+          </div>
+        </header>
+
+        <!-- 本文 -->
+        <div class="prose max-w-none">
+          <slot />
+        </div>
+
+        <!-- 記事下 -->
+        <div class="mt-12 pt-8 border-t border-slate-200">
+          <div class="flex flex-wrap items-center justify-between gap-4">
+            <a href="/blog/" class="inline-flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors group">
+              <span class="group-hover:-translate-x-1 transition-transform">←</span>
+              記事一覧に戻る
+            </a>
+            <div class="flex gap-2">
               {tags.map(tag => (
-                <span class="text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded">
+                <span class="text-xs bg-slate-100 text-slate-500 px-3 py-1 rounded-full">
                   #{tag}
                 </span>
               ))}
             </div>
-          )}
-        </header>
-
-        <!-- 本文 -->
-        <div class="prose prose-gray max-w-none">
-          <slot />
-        </div>
-
-        <!-- 記事下フッター -->
-        <div class="mt-12 pt-6 border-t border-gray-200">
-          <a
-            href="/blog/"
-            class="inline-flex items-center gap-1 text-sm text-blue-600 hover:text-blue-700 font-medium"
-          >
-            ← 記事一覧に戻る
-          </a>
+          </div>
         </div>
       </article>
 
-      <!-- サイドバー -->
-      <aside class="hidden lg:block w-64 shrink-0">
-        <div class="sticky top-20 space-y-6">
+      <!-- ─── サイドバー ─── -->
+      <aside class="hidden lg:block w-72 shrink-0">
+        <div class="sticky top-24 space-y-5">
+
+          <!-- 目次プロモ -->
+          <div class:list={['rounded-xl p-5 border', cat.bg, 'border-slate-200']}>
+            <p class:list={['text-xs font-bold uppercase tracking-wider mb-2', cat.text]}>
+              {category}
+            </p>
+            <p class="text-sm text-slate-700 font-semibold leading-snug">{title}</p>
+          </div>
+
           <!-- カテゴリ -->
-          <div class="bg-white rounded-lg border border-gray-200 p-4">
-            <h3 class="text-sm font-bold text-gray-700 mb-3">カテゴリ</h3>
-            <ul class="space-y-1.5">
-              <li>
-                <a href="/blog/?category=AI活用" class="text-sm text-gray-600 hover:text-blue-600 flex items-center gap-1">
-                  <span class="w-1.5 h-1.5 rounded-full bg-blue-400 inline-block"></span>
-                  AI仕事術・ChatGPT活用
-                </a>
-              </li>
-              <li>
-                <a href="/blog/?category=AIエージェント" class="text-sm text-gray-600 hover:text-blue-600 flex items-center gap-1">
-                  <span class="w-1.5 h-1.5 rounded-full bg-purple-400 inline-block"></span>
-                  AIエージェント導入事例
-                </a>
-              </li>
-              <li>
-                <a href="/blog/?category=製造業DX" class="text-sm text-gray-600 hover:text-blue-600 flex items-center gap-1">
-                  <span class="w-1.5 h-1.5 rounded-full bg-orange-400 inline-block"></span>
-                  製造業DX
-                </a>
-              </li>
-              <li>
-                <a href="/blog/?category=転職・キャリア" class="text-sm text-gray-600 hover:text-blue-600 flex items-center gap-1">
-                  <span class="w-1.5 h-1.5 rounded-full bg-green-400 inline-block"></span>
-                  転職・キャリア
-                </a>
-              </li>
+          <div class="bg-white rounded-xl border border-slate-200 p-5">
+            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">カテゴリ</p>
+            <ul class="space-y-2">
+              {[
+                { href: '/blog/?category=AI活用', label: 'AI仕事術・ChatGPT', dot: 'bg-blue-500' },
+                { href: '/blog/?category=AIエージェント', label: 'AIエージェント事例', dot: 'bg-violet-500' },
+                { href: '/blog/?category=製造業DX', label: '製造業DX', dot: 'bg-orange-500' },
+                { href: '/blog/?category=転職・キャリア', label: '転職・キャリア', dot: 'bg-emerald-500' },
+              ].map(({ href, label, dot }) => (
+                <li>
+                  <a href={href} class="flex items-center gap-2.5 text-sm text-slate-600 hover:text-blue-600 transition-colors group py-1">
+                    <span class:list={['w-2 h-2 rounded-full shrink-0 group-hover:scale-125 transition-transform', dot]}></span>
+                    {label}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 
           <!-- おすすめ記事 -->
-          <div class="bg-white rounded-lg border border-gray-200 p-4">
-            <h3 class="text-sm font-bold text-gray-700 mb-3">よく読まれている記事</h3>
-            <ul class="space-y-2">
-              <li>
-                <a href="/blog/chatgpt-gijiroku-jidoka-seizogyo/" class="text-xs text-gray-600 hover:text-blue-600 leading-snug">
-                  ChatGPTで議事録を自動化する方法
-                </a>
-              </li>
-              <li>
-                <a href="/blog/ai-houkokusho-prompt-template/" class="text-xs text-gray-600 hover:text-blue-600 leading-snug">
-                  AIで報告書を爆速作成するプロンプト
-                </a>
-              </li>
-              <li>
-                <a href="/blog/ai-gijiroku-tool-hikaku-2026/" class="text-xs text-gray-600 hover:text-blue-600 leading-snug">
-                  AI議事録ツール比較2026
-                </a>
-              </li>
+          <div class="bg-white rounded-xl border border-slate-200 p-5">
+            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">よく読まれている記事</p>
+            <ul class="space-y-3">
+              {[
+                { href: '/blog/chatgpt-gijiroku-jidoka-seizogyo/', label: 'ChatGPTで議事録を自動化する方法' },
+                { href: '/blog/ai-gijiroku-tool-hikaku-2026/', label: 'AI議事録ツール比較2026' },
+                { href: '/blog/ai-houkokusho-prompt-template/', label: 'AIで報告書を爆速作成するプロンプト' },
+                { href: '/blog/care-facility-handoff-report-agent/', label: '介護施設の申し送りをAIで効率化' },
+              ].map(({ href, label }) => (
+                <li>
+                  <a href={href} class="text-xs text-slate-600 hover:text-blue-600 leading-snug transition-colors block py-0.5 border-b border-slate-50 last:border-0">
+                    {label}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
       </aside>
+
     </div>
   </main>
+
   <Footer />
 </BaseLayout>
