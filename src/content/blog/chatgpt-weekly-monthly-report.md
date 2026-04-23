@@ -8,6 +8,7 @@ tags:
 - 月報 テンプレート
 - ChatGPT 業務報告
 - ChatGPT
+image: "/images/blog/chatgpt-weekly-monthly-report/eyecatch.png"
 ---
 
 ※ 本記事には一部アフィリエイトリンクが含まれます。紹介しているサービスは編集部が評価したものです。

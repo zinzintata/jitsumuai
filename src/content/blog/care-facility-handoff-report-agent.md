@@ -8,6 +8,7 @@ tags:
 - 介護記録 効率化
 - AIエージェント 介護
 - 介護
+image: "/images/blog/care-facility-handoff-report-agent/eyecatch.png"
 ---
 
 夜勤明けのスタッフが、疲れた状態で30〜60分かけて申し送りシートを書いている——そんな状況に悩んでいるユニットリーダーの方に向けて書きました。

@@ -8,6 +8,7 @@ tags:
 - ChatGPT 求人票 分析
 - AI 転職活動 効率化
 - AI
+image: "/images/blog/ai-tenshoku-kanzen-guide-2026/eyecatch.png"
 ---
 
 ※本記事にはアフィリエイト広告（リクルートエージェント・doda・ChatGPT Plus）が含まれます。

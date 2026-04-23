@@ -8,6 +8,7 @@ tags:
 - ビジネスメール テンプレート コピペ
 - AI メール 時短 製造業
 - ChatGPT
+image: "/images/blog/chatgpt-mail-template/eyecatch.png"
 ---
 
 ※PR：本記事はアフィリエイト広告を含みます。

@@ -8,6 +8,7 @@ tags:
 - 部下 フィードバック 書き方
 - 人事評価 文章 例文
 - AI
+image: "/images/blog/chatgpt-hyoka-comment-feedback-kanrishoku-2026/eyecatch.png"
 ---
 
 「評価コメントを書いてください」——この依頼が来るたびに、何時間も悩んでいませんか。

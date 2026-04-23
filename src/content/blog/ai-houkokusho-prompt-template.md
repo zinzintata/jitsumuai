@@ -8,6 +8,7 @@ tags:
 - プロンプト コピペ ビジネス
 - AI
 - 報告書
+image: "/images/blog/ai-houkokusho-prompt-template/eyecatch.png"
 ---
 
 ※本記事にはアフィリエイト広告が含まれます。

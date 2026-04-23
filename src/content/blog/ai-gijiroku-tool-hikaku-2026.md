@@ -8,6 +8,7 @@ tags:
 - CLOVA Note 議事録
 - PLAUD NOTE レビュー
 - AI
+image: "/images/blog/ai-gijiroku-tool-hikaku-2026/eyecatch.png"
 ---
 
 「会議に出て、議事録を書いて、確認メールを送る」——この一連の作業に、1回の会議につき30〜60分かけていませんか。

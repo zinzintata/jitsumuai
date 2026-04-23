@@ -8,6 +8,7 @@ tags:
 - 生成AI 比較 ビジネス
 - ChatGPT Gemini 違い
 - ChatGPT
+image: "/images/blog/chatgpt-gemini-copilot-hikaku/eyecatch.png"
 ---
 
 > **本記事にはアフィリエイト広告（PR）が含まれています。**

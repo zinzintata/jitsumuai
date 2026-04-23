@@ -8,6 +8,7 @@ tags:
 - 製造業 議事録 AI
 - Teams ChatGPT 議事録
 - ChatGPT
+image: "/images/blog/chatgpt-gijiroku-jidoka-seizogyo/eyecatch.png"
 ---
 
 > 本記事にはアフィリエイトリンク（PR）が含まれます。
